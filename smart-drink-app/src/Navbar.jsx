@@ -49,7 +49,7 @@ class NavBar extends React.Component {
                 <NavLink href="/components/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">Configure</NavLink>
+                <NavLink href="">Configure</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
