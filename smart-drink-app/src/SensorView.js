@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 // import { Line } from 'react-chartjs-2';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ReferenceLine } from 'recharts';
 import { Row, Col, Container, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import Layout from "./Layout.jsx";
 const data = [
@@ -57,6 +57,8 @@ const data = [
 
 export const SensorView = () => {
     return (
+      <Layout>
+        <Container className="pt-5" fluid="md">
         <Row>
         <Col xs="7">
           <LineChart width={730} height={250} data={data}
@@ -68,6 +70,8 @@ export const SensorView = () => {
             <Legend />
             <Line type="monotone" dataKey="pv" stroke="#8884d8" />
             <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+            <ReferenceLine y={4000} label="Threshold" stroke="red" strokeDasharray="3 3" />
+
           </LineChart>
           <button onClick={() => {}}> Fetch </button>
         </Col>
@@ -100,5 +104,7 @@ export const SensorView = () => {
           </Table>
         </Col>
       </Row>
+      </Container>
+      </Layout>
     );
 }

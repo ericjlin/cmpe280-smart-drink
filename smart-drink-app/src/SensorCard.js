@@ -1,7 +1,9 @@
 import { useEffect } from "react";
-import { Col, Card, CardBody, CardTitle, CardSubtitle, CardText, Button } from "reactstrap";
+import { Col, Card, CardBody, CardTitle, CardSubtitle, CardText, Button, Row } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 export const SensorCard = (props) => {
+    const history = useHistory();
     useEffect(() => {
 
     }, [])
@@ -17,12 +19,23 @@ export const SensorCard = (props) => {
                         className="mb-2 text-muted"
                         tag="h6"
                     >
-                        Card subtitle
+                        <Row>
+                            <Col>Active</Col>
+                            <Col><div style={{
+                                borderRadius: '50%',
+                                backgroundColor: '#7FFF00',
+                                height: 10,
+                                width: 10,
+                                marginTop: 5
+                            }}></div></Col>
+                            <Col></Col>
+                            <Col></Col>
+                        </Row>
                     </CardSubtitle>
                     <CardText>
-                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        {props.info}
                     </CardText>
-                    <Button onClick={props.toggle}>
+                    <Button onClick={() => history.push('/sensor')}>
                         Button
                     </Button>
                 </CardBody>

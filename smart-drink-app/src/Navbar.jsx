@@ -13,14 +13,14 @@ import {
   Collapse,
   NavLink
 } from "reactstrap";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       profileToggle: false,
-    //   role: localStorage.getItem("user") ? localStorage.getItem("user") : "",
+      //   role: localStorage.getItem("user") ? localStorage.getItem("user") : "",
     };
   }
 
@@ -39,14 +39,14 @@ class NavBar extends React.Component {
 
   render() {
     return (
-        <div>
+      <div>
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">Smart Drink</NavbarBrand>
-          <NavbarToggler onClick={() => {}} />
+          <NavbarToggler onClick={() => { }} />
           <Collapse isOpen={this.state.profileToggle} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/components/">Home</NavLink>
+                <NavLink href="/">Home</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="">Configure</NavLink>
@@ -57,13 +57,13 @@ class NavBar extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    Refridgerator
+                    <NavLink href="/sensor">Refridgerator</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    Bedroom
+                    <NavLink href="/sensor">Bedroom</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    Office
+                    <NavLink href="/sensor">Office</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
