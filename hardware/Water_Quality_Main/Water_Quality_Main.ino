@@ -22,7 +22,7 @@ const char *WIFI_PASSWORD = "";
 #define AWS_IOT_ENDPOINT ""
 
 // The MQTT topic that this device should publish to
-#define AWS_IOT_TOPIC "device/data/1"
+#define AWS_IOT_TOPIC ""
 
 WiFiClientSecure net = WiFiClientSecure();
 MQTTClient client = MQTTClient(256);
@@ -62,7 +62,7 @@ void connectToAWS()
   Serial.println("\nConnected to AWS IOT!");
 }
 
-void sendJsonToAWS(float tds_data, float temp_data, float ph_data, float turb_data)
+void sendJsonToAWS(float tds_data)
 { 
   StaticJsonDocument<256> jsonDoc;
   
@@ -74,16 +74,18 @@ void sendJsonToAWS(float tds_data, float temp_data, float ph_data, float turb_da
   serializeJson(jsonDoc, jsonBuffer);
 
   client.publish(AWS_IOT_TOPIC, jsonBuffer);
+  Serial.println("");
 }
 
 float getTdsData() {
   tds_sensor_value = analogRead(tds_pin);
-  tds_voltage = tds_sensor_value*5/4096.0; //Convert analog reading to Voltage
+  tds_voltage = tds_sensor_value*5/5115.0; //Convert analog reading to Voltage
   tds_value = (133.42/tds_voltage*tds_voltage*tds_voltage - 255.86*tds_voltage*tds_voltage + 857.39*tds_voltage)*0.5; //Convert voltage value to TDS value
+
+  Serial.println("");
   Serial.print("TDS Value: "); 
   Serial.print(tds_value);
   Serial.println(" ppm");
-  delay(2000);
 
   return tds_value;
 }
@@ -104,9 +106,8 @@ void setup() {
 
 void loop() {
   tds_value = getTdsData();
-  Serial.println("");
-
-  sendJsonToAWS(tds_value, temp_value, ph_value, turb_value);
+  sendJsonToAWS(tds_value);
+  
   client.loop();
-  delay(1000);
+  delay(5000);
 }
