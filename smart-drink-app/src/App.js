@@ -4,7 +4,6 @@ import './App.css';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { Row, Col, Container, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import Layout from "./Layout.jsx";
-import Amplify from 'aws-amplify';
 import { SensorView } from './SensorView';
 import { SensorCard } from './SensorCard';
 import { Dashboard } from './Dashboard';

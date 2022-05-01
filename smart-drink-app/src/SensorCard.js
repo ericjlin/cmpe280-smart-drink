@@ -4,9 +4,6 @@ import { useHistory } from "react-router-dom";
 
 export const SensorCard = (props) => {
     const history = useHistory();
-    useEffect(() => {
-
-    }, [])
     return (
         <Col>
             <Card
@@ -36,7 +33,7 @@ export const SensorCard = (props) => {
                         {props.info}
                     </CardText>
                     <Button onClick={() => history.push('/sensor')}>
-                        Button
+                        View
                     </Button>
                 </CardBody>
             </Card>

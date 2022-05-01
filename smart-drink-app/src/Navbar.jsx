@@ -48,22 +48,28 @@ class NavBar extends React.Component {
               <NavItem>
                 <NavLink href="/">Home</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="">Configure</NavLink>
-              </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Sensors
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    <NavLink href="/sensor">Refridgerator</NavLink>
+                    <NavLink href="/sensor">Refridgerator 1</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="/sensor">Bedroom</NavLink>
+                    <NavLink href="/sensor">Refridgerator 2</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="/sensor">Office</NavLink>
+                    <NavLink href="/sensor">Refridgerator 3</NavLink>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="/sensor">Refridgerator 4</NavLink>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="/sensor">Refridgerator 5</NavLink>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="/sensor">Refridgerator 6</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
