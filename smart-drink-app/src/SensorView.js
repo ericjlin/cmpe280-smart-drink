@@ -1,63 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 // import { Line } from 'react-chartjs-2';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ReferenceLine } from 'recharts';
+import { ScatterChart, ZAxis, Scatter, AreaChart, Area, BarChart, Bar, Label, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ReferenceLine } from 'recharts';
 import { Row, Col, Container, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import Layout from "./Layout.jsx";
 import {fetchData} from './AwsFunctions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
-
-const data = [
-  {
-    "name": "Page A",
-    "uv": 4000,
-    "pv": 2400,
-    "amt": 2400
-  },
-  {
-    "name": "Page B",
-    "uv": 3000,
-    "pv": 1398,
-    "amt": 2210
-  },
-  {
-    "name": "Page C",
-    "uv": 2000,
-    "pv": 9800,
-    "amt": 2290
-  },
-  {
-    "name": "Page D",
-    "uv": 2780,
-    "pv": 3908,
-    "amt": 2000
-  },
-  {
-    "name": "Page E",
-    "uv": 1890,
-    "pv": 4800,
-    "amt": 2181
-  },
-  {
-    "name": "Page F",
-    "uv": 2390,
-    "pv": 3800,
-    "amt": 2500
-  },
-  {
-    "name": "Page G",
-    "uv": 3490,
-    "pv": 4300,
-    "amt": 2100
-  }
-]
-
-const trows = [["11/04/2021-07:30", "40"],
-["11/04/2021-07:31", "45"],
-["11/04/2021-07:32", "46"],
-["11/04/2021-07:33", "43"],
-["11/04/2021-07:34", "40"], ["11/04/2021-07:34", "40"], ["11/04/2021-07:34", "40"]]
 
 export const SensorView = () => {
   const fetchDataFormDynamoDb = async () => {
@@ -77,22 +26,7 @@ export const SensorView = () => {
     <Layout>
       <Container className="pt-5" fluid="md">
         <Row>
-          <Col xs="7">
-            <LineChart width={730} height={550} data={test}
-              margin={{ top: 5, right: 30, left: 10, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="value" stroke="#8884d8" />
-              {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
-              <ReferenceLine y={350} label="Threshold" stroke="red" strokeDasharray="3 3" />
-
-            </LineChart>
-            <button onClick={() => fetchDataFormDynamoDb()}> Fetch </button>
-          </Col>
-          <Col xs="5" >
+        <Col xs="5" >
             <Table
               bordered
               responsive
@@ -120,6 +54,65 @@ export const SensorView = () => {
               </tbody>
             </Table>
           </Col>
+          <Col xs="7">
+            <h3 style={{marginLeft: '370px'}}><u>Line Chart</u></h3>
+            <LineChart width={800} height={350} data={test}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line name="TDS (PPM)" type="monotone" dataKey="value" stroke="#8884d8" />
+              <ReferenceLine y={370} label="Threshold" stroke="red" strokeDasharray="3 3" />
+
+            </LineChart>
+            
+            <button onClick={() => fetchDataFormDynamoDb()}> Fetch </button>
+
+            <h3 style={{marginLeft: '370px'}}><u>Bar Chart</u></h3>
+            <BarChart width={800} height={350} data={test}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar name="TDS (PPM)" dataKey="value" fill="#8884d8" />
+              <ReferenceLine y={370} label="Threshold" stroke="red" strokeDasharray="3 3" />
+            </BarChart>
+
+            <h3 style={{marginLeft: '370px'}}><u>Area Chart</u></h3>
+            <AreaChart width={800} height={350} data={test}
+              margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+              <defs>
+                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                  <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                </linearGradient>
+
+              </defs>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Tooltip />
+              <Area name="TDS (PPM)" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+              <ReferenceLine y={370} label="Threshold" stroke="red" strokeDasharray="3 3" />
+            </AreaChart>
+
+            <h3 style={{marginLeft: '370px'}}><u>Scatter Chart</u></h3>
+            <ScatterChart width={800} height={350}
+              margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" name="timestamp"  />
+              <YAxis dataKey="value" name="value" unit="ppm" />
+              <Tooltip />
+              <Legend />
+              <Scatter name="TDS (PPM)" data={test} fill="#8884d8" />
+              <ReferenceLine y={370} label="Threshold" stroke="red" strokeDasharray="3 3" />
+            </ScatterChart>
+
+
+          </Col>
+
         </Row>
       </Container>
     </Layout>
