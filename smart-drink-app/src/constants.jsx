@@ -2,5 +2,6 @@ export const Constants = {
     GET_DATA_OUT: 'GET_DATA_OUT',
     GET_DATA_SUCCESS: 'GET_DATA_SUCCESS',
     GET_DATA_FAIL: 'GET_DATA_FAIL',
-    SET_DATA: 'SET_DATA'
+    SET_DATA: 'SET_DATA',
+    SET_PAGE: 'SET_PAGE'
 }

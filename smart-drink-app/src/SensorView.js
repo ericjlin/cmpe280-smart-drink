@@ -1,12 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-// import { Line } from 'react-chartjs-2';
-import { ScatterChart, ZAxis, Scatter, AreaChart, Area, BarChart, Bar, Label, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ReferenceLine } from 'recharts';
+import { ScatterChart, Scatter, AreaChart, Area, BarChart, Bar, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ReferenceLine } from 'recharts';
 import { Row, Col, Container, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import Layout from "./Layout.jsx";
 import {fetchData} from './AwsFunctions';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const SensorView = () => {
   const fetchDataFormDynamoDb = async () => {
@@ -17,10 +15,22 @@ export const SensorView = () => {
   const test = useSelector(
     state => state.reducer.data
   );
+  const displayed = useSelector(state => state.reducer.displayed);
+  const pages = useSelector(state => state.reducer.pages);
+  const [currentPage, setPage] = useState(1);
   const dispatch = useDispatch();
+
   useEffect(() => {
     fetchDataFormDynamoDb();
   }, [])
+
+  const handlePagination = (event) => {
+    dispatch({
+      type: 'SET_PAGE',
+      currentPage: event.target.id,
+    });
+    setPage(event.target.id);
+  }
 
   return (
     <Layout>
@@ -43,9 +53,9 @@ export const SensorView = () => {
               </thead>
               <tbody>
                 {
-                  test.map((r) => {
+                  displayed.map((r, index) => {
                     return (
-                      <tr onClick={(e) => { }}>
+                      <tr id={index} onClick={(e) => { }}>
                         <td>{r.name}</td>
                         <td>{r.value}</td>
                       </tr>);
@@ -53,6 +63,15 @@ export const SensorView = () => {
                 }
               </tbody>
             </Table>
+            <Pagination>
+              {
+                pages.map(obj => {
+                  return(<PaginationItem>
+                    <PaginationLink id={obj} onClick={handlePagination}>{obj}</PaginationLink>
+                  </PaginationItem>);
+                })
+              }
+            </Pagination>
           </Col>
           <Col xs="7">
             <h3 style={{marginLeft: '370px'}}><u>Line Chart</u></h3>

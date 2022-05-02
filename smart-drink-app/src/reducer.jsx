@@ -3,7 +3,9 @@ import { combineReducers } from 'redux';
 const initialState = {
     data: [],
     error: undefined,
-    requestOut: false
+    requestOut: false,
+    displayed: [],
+    pages: []
 }
 
 const reducer = (state= initialState, action) => {
@@ -25,10 +27,26 @@ const reducer = (state= initialState, action) => {
                 error: undefined,
                 requestOut: false
             }
-        case Constants.SET_DATA:
+        case Constants.SET_PAGE:
+            // console.log("CALLED",  action);
+            const indexLastPoint = action.currentPage * 15;
+            const indexFirstPoint = indexLastPoint - 15;
             return {
                 ...state,
-                data: action.data
+                displayed: state.data.filter((item, index) => {
+                    return index >= indexFirstPoint && index < indexLastPoint
+                })
+            }
+        case Constants.SET_DATA:
+            let pages = action.data.length / 15;
+            let page_array = [];
+            for (let i = 0; i < pages; i++) {
+                page_array.push(i + 1)
+            }
+            return {
+                ...state,
+                data: action.data,
+                pages: page_array
             }
         default:
             return state;

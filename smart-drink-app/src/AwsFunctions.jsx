@@ -1,8 +1,6 @@
 import * as AWS from 'aws-sdk';
 import {Constants} from './constants';
 
-const configuration = {
-  }
   // AWS.config.loadFromPath('./config.json');
 AWS.config.update(configuration);
 const docClient = new AWS.DynamoDB.DocumentClient()
@@ -17,7 +15,6 @@ export const fetchData = (tableName) => dispatch => {
     docClient.scan(params, function (err, data) {
         if (!err) {
             const ret = data.Items.map((obj) => {
-                console.log(obj);
                 return {
                   "name": new Intl.DateTimeFormat('en-US', 
                     {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(obj.timeStamp),
@@ -27,13 +24,15 @@ export const fetchData = (tableName) => dispatch => {
             ret.sort((a, b) => {
                 return new Date(b.name) - new Date(a.name);
             })
-            // ret.reverse();
-            console.log("Success", ret);
+            console.log("ha");
             dispatch({
               type: Constants.SET_DATA,
               data: ret,
             });
-          // console.log(data)
+            dispatch({
+              type: Constants.SET_PAGE,
+              currentPage: 1,
+            });
           dispatch({ type: Constants.GET_DATA_SUCCESS });
         } else {
             console.log("ERROR", err)
