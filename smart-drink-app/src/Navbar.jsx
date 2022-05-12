@@ -3,7 +3,6 @@ import {
   Navbar,
   Nav,
   NavItem,
-  Dropdown,
   DropdownItem,
   DropdownToggle,
   DropdownMenu,
@@ -13,14 +12,12 @@ import {
   Collapse,
   NavLink
 } from "reactstrap";
-import { Link } from "react-router-dom";
 
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       profileToggle: false,
-      //   role: localStorage.getItem("user") ? localStorage.getItem("user") : "",
     };
   }
 
@@ -29,13 +26,6 @@ class NavBar extends React.Component {
       profileToggle: !this.state.profileToggle,
     });
   };
-
-  handleLogout = (e) => {
-    // localStorage.clear();
-    // this.props.history.push("/login");
-  };
-
-  //prop that checks role
 
   render() {
     return (

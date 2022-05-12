@@ -1,5 +1,7 @@
 import './App.css';
-import { ScatterChart, Scatter, AreaChart, Area, BarChart, Bar, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ReferenceLine } from 'recharts';
+import { ScatterChart, Scatter, AreaChart, 
+  Area, BarChart, Bar, LineChart, Line, CartesianGrid, 
+  XAxis, YAxis, Tooltip, Legend, ReferenceLine } from 'recharts';
 import { Row, Col, Container, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import Layout from "./Layout.jsx";
 import {fetchData} from './AwsFunctions';
@@ -77,7 +79,7 @@ export const SensorView = () => {
             <h3 style={{marginLeft: '370px'}}><u>Line Chart</u></h3>
             <LineChart width={800} height={350} data={test}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis dataKey="name" reversed />
               <YAxis />
               <Tooltip />
               <Legend />
@@ -91,7 +93,7 @@ export const SensorView = () => {
             <h3 style={{marginLeft: '370px'}}><u>Bar Chart</u></h3>
             <BarChart width={800} height={350} data={test}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis dataKey="name" reversed />
               <YAxis />
               <Tooltip />
               <Legend />
@@ -109,7 +111,7 @@ export const SensorView = () => {
                 </linearGradient>
 
               </defs>
-              <XAxis dataKey="name" />
+              <XAxis dataKey="name" reversed />
               <YAxis />
               <CartesianGrid strokeDasharray="3 3" />
               <Tooltip />
@@ -121,7 +123,7 @@ export const SensorView = () => {
             <ScatterChart width={800} height={350}
               margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" name="timestamp"  />
+              <XAxis dataKey="name" name="timestamp" reversed />
               <YAxis dataKey="value" name="value" unit="ppm" />
               <Tooltip />
               <Legend />
