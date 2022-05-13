@@ -9,9 +9,9 @@ Eric Lin <br />
 
 Note: You will need the required hardware listed below to run the app
 
-cd smart-drink-app
-npm install
-npm start
+cd smart-drink-app <br />
+npm install <br />
+npm start <br />
 
 ### Hardware Support Needed
 - TDS Sensor (https://wiki.seeedstudio.com/Grove-TDS-Sensor/)
